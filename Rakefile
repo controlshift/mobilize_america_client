@@ -1,6 +1,49 @@
-require "bundler/gem_tasks"
-require "rspec/core/rake_task"
+# encoding: utf-8
 
-RSpec::Core::RakeTask.new(:spec)
+require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
+require 'rake'
+require 'juwelier'
+Juwelier::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
+  gem.name = "mobilizeamerica-client"
+  gem.homepage = "http://github.com/controlshift/mobilizeamerica_client"
+  gem.license = "MIT"
+  gem.summary = %Q{Client gem for the mobilizeamerica API}
+  gem.email = "jacinda@controlshiftlabs.com"
+  gem.authors = ["Jacinda Moore"]
 
-task :default => :spec
+  # dependencies defined in Gemfile
+end
+Juwelier::RubygemsDotOrgTasks.new
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
+end
+
+desc "Code coverage detail"
+task :simplecov do
+  ENV['COVERAGE'] = "true"
+  Rake::Task['test'].execute
+end
+
+task :default => :test
+
+require 'rdoc/task'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "mobilizeamerica-client #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
