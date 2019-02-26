@@ -1,8 +1,6 @@
 # Mobilizeamerica::Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mobilizeamerica/client`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A minimalist API client for the [MobilizeAmerica API](https://github.com/mobilizeamerica/api): 
 
 ## Installation
 
@@ -22,7 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+For now, the gem only supports listing an organization's events. 
+
+`MobilizeAmerica.new.organization_events(organization_id: 123)`
+
 
 ## Development
 
