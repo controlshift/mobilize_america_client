@@ -36,5 +36,12 @@ RSpec.describe MobilizeAmerica::Client::Events do
         .to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id, zipcode: zipcode)).to eq response
     end
+
+    it 'should support a max_dist parameter to go with zipcode' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {zipcode: '23456', max_dist: 100})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, zipcode: '23456', max_distance_miles: 100)).to eq response
+    end
   end
 end

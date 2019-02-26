@@ -1,7 +1,7 @@
 module MobilizeAmerica
   class Client
     module Events
-      def organization_events(organization_id:, updated_since: nil, zipcode: nil)
+      def organization_events(organization_id:, updated_since: nil, zipcode: nil, max_distance_miles: nil)
         params = {}
 
         unless updated_since.nil?
@@ -10,6 +10,10 @@ module MobilizeAmerica
 
         unless zipcode.nil?
           params[:zipcode] = zipcode
+
+          unless max_distance_miles.nil?
+            params[:max_dist] = max_distance_miles
+          end
         end
 
         get(path: "/organizations/#{esc(organization_id)}/events", params: params)
