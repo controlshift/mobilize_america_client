@@ -28,5 +28,13 @@ RSpec.describe MobilizeAmerica::Client::Events do
         .to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id, updated_since: updated_since)).to eq response
     end
+
+    it 'should support a zipcode parameter' do
+      zipcode = '23456'
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {zipcode: zipcode})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, zipcode: zipcode)).to eq response
+    end
   end
 end
