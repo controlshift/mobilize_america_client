@@ -20,5 +20,13 @@ RSpec.describe MobilizeAmerica::Client::Events do
       stub_request(:get, expected_url).with(headers: standard_headers).to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: 'foo/bar')).to eq response
     end
+
+    it 'should support an updated_since parameter' do
+      updated_since = Time.new
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {updated_since: updated_since.to_i})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, updated_since: updated_since)).to eq response
+    end
   end
 end
