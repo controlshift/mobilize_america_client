@@ -1,8 +1,17 @@
 module MobilizeAmerica
   class Client
     module Events
-      def organization_events(organization_id:, updated_since: nil, zipcode: nil, max_distance_miles: nil)
+      def organization_events(organization_id:, updated_since: nil, max_distance_miles: nil, page: nil, per_page: nil,
+                              zipcode: nil)
         params = {}
+
+        unless page.nil?
+          params[:page] = page
+        end
+
+        unless per_page.nil?
+          params[:per_page] = per_page
+        end
 
         unless updated_since.nil?
           params[:updated_since] = updated_since.to_i
