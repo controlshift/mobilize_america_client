@@ -14,5 +14,11 @@ RSpec.describe MobilizeAmerica::Client::Events do
       stub_request(:get, events_url).with(headers: standard_headers).to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id)).to eq response
     end
+
+    it 'should escape the organization ID' do
+      expected_url = "https://#{MobilizeAmerica::Client::API_DOMAIN}/api/v1/organizations/foo%2Fbar/events"
+      stub_request(:get, expected_url).with(headers: standard_headers).to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: 'foo/bar')).to eq response
+    end
   end
 end
