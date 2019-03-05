@@ -13,10 +13,10 @@ require 'rake'
 require 'juwelier'
 Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "mobilizeamerica-client"
-  gem.homepage = "http://github.com/controlshift/mobilizeamerica_client"
+  gem.name = "mobilize-america-client"
+  gem.homepage = "http://github.com/controlshift/mobilize_america_client"
   gem.license = "MIT"
-  gem.summary = %Q{Client gem for the mobilizeamerica API}
+  gem.summary = %Q{Client gem for the MobilizeAmerica API}
   gem.email = "jacinda@controlshiftlabs.com"
   gem.authors = ["Jacinda Moore"]
 
@@ -43,7 +43,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "mobilizeamerica-client #{version}"
+  rdoc.title = "mobilize-america-client #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

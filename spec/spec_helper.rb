@@ -4,7 +4,7 @@ require 'webmock/rspec'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
-require "mobilize_america"
+require "mobilize_america_client"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
