@@ -1,6 +1,6 @@
 require 'json'
 
-module MobilizeAmerica
+module MobilizeAmericaClient
   module Request
     API_DOMAIN = 'events.mobilizeamerica.io'.freeze
     API_BASE_PATH = '/api/v1'.freeze

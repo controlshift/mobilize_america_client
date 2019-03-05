@@ -1,4 +1,4 @@
-module MobilizeAmerica
+module MobilizeAmericaClient
   class Client
     module Events
       def organization_events(organization_id:, updated_since: nil, max_distance_miles: nil, page: nil, per_page: nil,
