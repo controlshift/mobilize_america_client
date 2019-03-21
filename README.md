@@ -22,7 +22,7 @@ Or install it yourself as:
 
 For now, the gem only supports listing an organization's events.
 
-`MobilizeAmericaClient.new.organization_events(organization_id: 123)`
+`MobilizeAmericaClient::Client.new.organization_events(organization_id: 123)`
 
 
 ## Development
