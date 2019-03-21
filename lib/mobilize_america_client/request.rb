@@ -2,8 +2,8 @@ require 'json'
 
 module MobilizeAmericaClient
   module Request
-    API_DOMAIN = 'events.mobilizeamerica.io'.freeze
-    API_BASE_PATH = '/api/v1'.freeze
+    API_DOMAIN = 'api.mobilize.us'.freeze
+    API_BASE_PATH = '/v1'.freeze
 
     def get(path:, params: {})
       request(method: :get, path: path, params: params)

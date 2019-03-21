@@ -5,9 +5,11 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
 
   subject { MobilizeAmericaClient::Client.new }
 
+  let(:base_url) { "https://#{MobilizeAmericaClient::Client::API_DOMAIN}#{MobilizeAmericaClient::Client::API_BASE_PATH}" }
+
   describe '#organization_events' do
     let(:org_id) { 123 }
-    let(:events_url) { "https://#{MobilizeAmericaClient::Client::API_DOMAIN}/api/v1/organizations/#{org_id}/events" }
+    let(:events_url) { "#{base_url}/organizations/#{org_id}/events" }
     let(:response) { {'data' => [{'id' => 1, 'description' => 'event 1'}, {'id' => 2, 'description' => 'event 2'}]} }
 
     it 'should call the endpoint and return JSON' do
@@ -16,7 +18,7 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
     end
 
     it 'should escape the organization ID' do
-      expected_url = "https://#{MobilizeAmericaClient::Client::API_DOMAIN}/api/v1/organizations/foo%2Fbar/events"
+      expected_url = "#{base_url}/organizations/foo%2Fbar/events"
       stub_request(:get, expected_url).with(headers: standard_headers).to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: 'foo/bar')).to eq response
     end
