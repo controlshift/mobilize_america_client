@@ -1,5 +1,7 @@
 # MobilizeAmericaClient::Client
 
+[![Build Status](https://travis-ci.org/controlshift/mobilize_america_client.svg?branch=master)](https://travis-ci.org/controlshift/mobilize_america_client)
+
 A minimalist API client for the [MobilizeAmerica API](https://github.com/mobilizeamerica/api):
 
 ## Installation
