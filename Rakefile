@@ -17,8 +17,8 @@ Juwelier::Tasks.new do |gem|
   gem.homepage = "http://github.com/controlshift/mobilize_america_client"
   gem.license = "MIT"
   gem.summary = %Q{Client gem for the MobilizeAmerica API}
-  gem.email = "jacinda@controlshiftlabs.com"
-  gem.authors = ["Jacinda Moore"]
+  gem.email = "grey@controlshiftlabs.com"
+  gem.authors = ["Grey Moore"]
 
   # dependencies defined in Gemfile
 end
