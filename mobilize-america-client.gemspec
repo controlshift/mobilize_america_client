@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
-  s.authors = ["Jacinda Moore".freeze]
-  s.date = "2019-03-21"
-  s.email = "jacinda@controlshiftlabs.com".freeze
+  s.authors = ["Grey Moore".freeze]
+  s.date = "2020-05-08"
+  s.email = "grey@controlshiftlabs.com".freeze
   s.executables = ["console".freeze, "setup".freeze]
   s.extra_rdoc_files = [
     "LICENSE",
@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".rspec",
+    ".rubocop.yml",
+    ".travis.yml",
     "CODE_OF_CONDUCT.md",
     "Gemfile",
     "LICENSE",
@@ -40,31 +42,34 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/controlshift/mobilize_america_client".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "2.7.7".freeze
+  s.rubygems_version = "3.0.4".freeze
   s.summary = "Client gem for the MobilizeAmerica API".freeze
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<faraday>.freeze, ["~> 0.15"])
-      s.add_development_dependency(%q<rspec>.freeze, ["~> 3.0"])
-      s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.4"])
-      s.add_development_dependency(%q<rake>.freeze, ["~> 10.0"])
-      s.add_development_dependency(%q<webmock>.freeze, ["~> 3.4"])
+      s.add_runtime_dependency(%q<faraday>.freeze, ["> 0.15"])
+      s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
+      s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
+      s.add_development_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
+      s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
-      s.add_dependency(%q<rspec>.freeze, ["~> 3.0"])
-      s.add_dependency(%q<juwelier>.freeze, ["~> 2.4"])
-      s.add_dependency(%q<rake>.freeze, ["~> 10.0"])
-      s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
+      s.add_dependency(%q<faraday>.freeze, ["> 0.15"])
+      s.add_dependency(%q<rspec>.freeze, [">= 0"])
+      s.add_dependency(%q<juwelier>.freeze, [">= 0"])
+      s.add_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_dependency(%q<webmock>.freeze, [">= 0"])
+      s.add_dependency(%q<rubocop>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
-    s.add_dependency(%q<rspec>.freeze, ["~> 3.0"])
-    s.add_dependency(%q<juwelier>.freeze, ["~> 2.4"])
-    s.add_dependency(%q<rake>.freeze, ["~> 10.0"])
-    s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
+    s.add_dependency(%q<faraday>.freeze, ["> 0.15"])
+    s.add_dependency(%q<rspec>.freeze, [">= 0"])
+    s.add_dependency(%q<juwelier>.freeze, [">= 0"])
+    s.add_dependency(%q<rake>.freeze, [">= 0"])
+    s.add_dependency(%q<webmock>.freeze, [">= 0"])
+    s.add_dependency(%q<rubocop>.freeze, [">= 0"])
   end
 end
 
