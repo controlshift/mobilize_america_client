@@ -1,5 +1,6 @@
 require 'faraday'
 require 'mobilize_america_client/client/events'
+require 'mobilize_america_client/client/organizations'
 require 'mobilize_america_client/request'
 
 module MobilizeAmericaClient
@@ -12,5 +13,6 @@ module MobilizeAmericaClient
 
     include MobilizeAmericaClient::Request
     include MobilizeAmericaClient::Client::Events
+    include MobilizeAmericaClient::Client::Organizations
   end
 end
