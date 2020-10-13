@@ -1,8 +1,8 @@
 module MobilizeAmericaClient
   class Client
     module Events
-      def organization_events(organization_id:, timeslot_start: nil, updated_since: nil, max_distance_miles: nil, page: nil, per_page: nil,
-                              zipcode: nil)
+      def organization_events(organization_id:, timeslot_start: nil, timeslot_end: nil, updated_since: nil,
+                              max_distance_miles: nil, page: nil, per_page: nil, zipcode: nil)
         params = {}
 
         unless page.nil?
@@ -15,6 +15,10 @@ module MobilizeAmericaClient
 
         unless timeslot_start.nil?
           params[:timeslot_start] = timeslot_start
+        end
+
+        unless timeslot_end.nil?
+          params[:timeslot_end] = timeslot_end
         end
 
         unless updated_since.nil?

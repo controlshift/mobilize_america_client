@@ -31,6 +31,15 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
       expect(subject.organization_events(organization_id: org_id, timeslot_start: timeslot_start)).to eq response
     end
 
+    it 'should support a timeslot_end parameter' do
+      timeslot_end = "gte_#{Time.new.to_i}"
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {timeslot_end: timeslot_end})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, timeslot_end: timeslot_end)).to eq response
+    end
+
+
     it 'should support an updated_since parameter' do
       updated_since = Time.new
       stub_request(:get, events_url)
