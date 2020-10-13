@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Grey Moore".freeze]
-  s.date = "2020-10-02"
+  s.date = "2020-10-13"
   s.email = "grey@controlshiftlabs.com".freeze
   s.executables = ["console".freeze, "setup".freeze]
   s.extra_rdoc_files = [
@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/controlshift/mobilize_america_client".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.0.8".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "Client gem for the MobilizeAmerica API".freeze
 
   if s.respond_to? :specification_version then
