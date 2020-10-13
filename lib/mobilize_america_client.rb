@@ -2,8 +2,8 @@ require 'mobilize_america_client/client'
 
 module MobilizeAmerica
   class << self
-    def new
-      MobilizeAmericaClient::Client.new
+    def new(options = {})
+      MobilizeAmericaClient::Client.new(options)
     end
   end
 end

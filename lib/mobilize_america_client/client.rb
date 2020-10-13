@@ -6,9 +6,14 @@ require 'mobilize_america_client/request'
 module MobilizeAmericaClient
   class Client
     attr_reader :connection
+    attr_accessor :api_key
 
-    def initialize
-      @connection = Faraday.new(url: "https://#{API_DOMAIN}")
+    def initialize(options = {})
+      self.api_key = options[:api_key]
+
+      api_domain = options[:api_domain] || API_DOMAIN
+
+      @connection = Faraday.new(url: "https://#{api_domain}")
     end
 
     include MobilizeAmericaClient::Request

@@ -20,11 +20,29 @@ Or install it yourself as:
 
     $ gem install mobilize-america-client
 
+## Configuration
+
+By default, the client accesses the public production instance without authentication. 
+
+`client = MobilizeAmericaClient::Client.new`
+
+It is also possible to provide an API key to the client to make authenticated requests, or to specify
+other endpoints. 
+
+`client = MobilizeAmericaClient::Client.new(api_key: 'abc123', api_domain: 'staging-api.mobilize.us')`
+
+
 ## Usage
 
-For now, the gem only supports listing an organization's events.
+Retrieve a list of organizations
+`client.organizations(page: 2, per_page: 50)`
 
-`MobilizeAmericaClient::Client.new.organization_events(organization_id: 123)`
+
+Retrieve a list of an organization's events
+`client.organization_events(organization_id: 123)`
+
+Retrieve a specific event
+`client.organization_event(organization_id: 123, event_id: 123)`
 
 
 ## Development

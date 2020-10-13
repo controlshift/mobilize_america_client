@@ -8,4 +8,6 @@ group :development do
   gem 'rake'
   gem 'webmock'
   gem 'rubocop'
+  gem 'dotenv'
+  gem 'byebug'
 end

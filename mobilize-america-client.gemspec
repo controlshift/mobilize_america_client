@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Grey Moore".freeze]
-  s.date = "2020-10-02"
+  s.date = "2020-10-13"
   s.email = "grey@controlshiftlabs.com".freeze
   s.executables = ["console".freeze, "setup".freeze]
   s.extra_rdoc_files = [
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "bin/console",
     "bin/setup",
+    "example.rb",
     "lib/mobilize_america_client.rb",
     "lib/mobilize_america_client/client.rb",
     "lib/mobilize_america_client/client/events.rb",
@@ -58,6 +59,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rake>.freeze, [">= 0"])
       s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
       s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
+      s.add_development_dependency(%q<dotenv>.freeze, [">= 0"])
     else
       s.add_dependency(%q<faraday>.freeze, ["> 0.15"])
       s.add_dependency(%q<rspec>.freeze, [">= 0"])
@@ -65,6 +67,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rake>.freeze, [">= 0"])
       s.add_dependency(%q<webmock>.freeze, [">= 0"])
       s.add_dependency(%q<rubocop>.freeze, [">= 0"])
+      s.add_dependency(%q<dotenv>.freeze, [">= 0"])
     end
   else
     s.add_dependency(%q<faraday>.freeze, ["> 0.15"])
@@ -73,6 +76,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rake>.freeze, [">= 0"])
     s.add_dependency(%q<webmock>.freeze, [">= 0"])
     s.add_dependency(%q<rubocop>.freeze, [">= 0"])
+    s.add_dependency(%q<dotenv>.freeze, [">= 0"])
   end
 end
 
