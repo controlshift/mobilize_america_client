@@ -20,6 +20,11 @@ module MobilizeAmericaClient
         req.path = "#{API_BASE_PATH}#{path}"
         req.params = params
         req.headers['Content-Type'] = 'application/json'
+
+        unless api_key.nil?
+          req.headers['Authorization'] = "Bearer #{api_key}"
+        end
+
         req.body = ::JSON.generate(body) unless body.empty?
       end
 

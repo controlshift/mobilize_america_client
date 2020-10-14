@@ -36,5 +36,9 @@ module MobilizeAmericaClient
         get(path: "/organizations/#{esc(organization_id)}/events", params: params)
       end
     end
+
+    def organization_event(organization_id:, event_id:)
+      get(path: "/organizations/#{esc(organization_id)}/events/#{esc(event_id)}")
+    end
   end
 end
