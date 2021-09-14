@@ -2,6 +2,7 @@ require 'faraday'
 require 'mobilize_america_client/client/events'
 require 'mobilize_america_client/client/organizations'
 require 'mobilize_america_client/request'
+require 'mobilize_america_client/errors'
 
 module MobilizeAmericaClient
   class Client

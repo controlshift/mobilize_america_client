@@ -12,6 +12,12 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
     let(:events_url) { "#{base_url}/organizations/#{org_id}/events" }
     let(:response) { {'data' => [{'id' => 1, 'description' => 'event 1'}, {'id' => 2, 'description' => 'event 2'}]} }
 
+    it 'should raise if response status is 404' do
+      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 404, body: {error: 'not found'}.to_json)
+
+      expect { subject.organization_events(organization_id: org_id) }.to raise_error MobilizeAmericaClient::NotFoundError
+    end
+
     it 'should call the endpoint and return JSON' do
       stub_request(:get, events_url).with(headers: standard_headers).to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id)).to eq(response)
