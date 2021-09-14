@@ -28,6 +28,10 @@ module MobilizeAmericaClient
         req.body = ::JSON.generate(body) unless body.empty?
       end
 
+      if response.status == 404
+        raise MobilizeAmericaClient::NotFoundError
+      end
+
       JSON.parse(response.body)
     end
   end
