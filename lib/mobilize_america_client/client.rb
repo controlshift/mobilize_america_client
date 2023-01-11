@@ -1,4 +1,5 @@
 require 'faraday'
+require 'mobilize_america_client/client/enums'
 require 'mobilize_america_client/client/events'
 require 'mobilize_america_client/client/organizations'
 require 'mobilize_america_client/request'
@@ -18,6 +19,7 @@ module MobilizeAmericaClient
     end
 
     include MobilizeAmericaClient::Request
+    include MobilizeAmericaClient::Client::Enums
     include MobilizeAmericaClient::Client::Events
     include MobilizeAmericaClient::Client::Organizations
   end
