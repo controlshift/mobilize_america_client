@@ -40,5 +40,13 @@ module MobilizeAmericaClient
     def organization_event(organization_id:, event_id:)
       get(path: "/organizations/#{esc(organization_id)}/events/#{esc(event_id)}")
     end
+
+    def organization_event_attendances(organization_id:, event_id:)
+      get(path: "/organizations/#{esc(organization_id)}/events/#{esc(event_id)}/attendances")
+    end
+
+    def create_organization_event_attendance(organization_id:, event_id:, attendance_data:)
+      post(path: "/organizations/#{esc(organization_id)}/events/#{esc(event_id)}/attendances", body: attendance_data)
+    end
   end
 end
