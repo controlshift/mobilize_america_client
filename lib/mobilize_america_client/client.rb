@@ -15,7 +15,7 @@ module MobilizeAmericaClient
 
       api_domain = options[:api_domain] || API_DOMAIN
 
-      @connection = Faraday.new(url: "https://#{api_domain}")
+      @connection = Faraday.new(url: "https://#{api_domain}", request: { params_encoder: Faraday::FlatParamsEncoder })
     end
 
     include MobilizeAmericaClient::Request
