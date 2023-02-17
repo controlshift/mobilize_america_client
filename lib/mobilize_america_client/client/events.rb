@@ -39,11 +39,11 @@ module MobilizeAmericaClient
         end
 
         unless tag_ids.nil? || tag_ids.empty?
-          params[:tag_id] = tag_ids
+          params[:tag_id] = tag_ids.join(',')
         end
 
         unless event_types.nil? || event_types.empty?
-          params[:event_types] = event_types
+          params[:event_types] = event_types.join(',')
         end
 
         unless is_virtual.nil?
