@@ -1,4 +1,5 @@
 require 'faraday'
+require 'mobilize_america_client/client/enums'
 require 'mobilize_america_client/client/events'
 require 'mobilize_america_client/client/organizations'
 require 'mobilize_america_client/request'
@@ -14,10 +15,11 @@ module MobilizeAmericaClient
 
       api_domain = options[:api_domain] || API_DOMAIN
 
-      @connection = Faraday.new(url: "https://#{api_domain}")
+      @connection = Faraday.new(url: "https://#{api_domain}", request: { params_encoder: Faraday::FlatParamsEncoder })
     end
 
     include MobilizeAmericaClient::Request
+    include MobilizeAmericaClient::Client::Enums
     include MobilizeAmericaClient::Client::Events
     include MobilizeAmericaClient::Client::Organizations
   end

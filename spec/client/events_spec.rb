@@ -75,6 +75,41 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
         .to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id, page: 2, per_page: 100)).to eq(response)
     end
+
+    it 'should support an event campaign id parameter' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {event_campaign_id: 1})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, event_campaign_id: 1)).to eq(response)
+    end
+
+    it 'should support a tag ids parameter' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {tag_id: 'foo,bar'})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, tag_ids: ['foo', 'bar'])).to eq(response)
+    end
+
+    it 'should support an event types parameter' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {event_types: 'foo,bar'})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, event_types: ['foo', 'bar'])).to eq(response)
+    end
+
+    it 'should support a virtual parameter' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {is_virtual: true})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, is_virtual: true)).to eq(response)
+    end
+
+    it 'should support an exclude full parameter' do
+      stub_request(:get, events_url)
+        .with(headers: standard_headers, query: {exclude_full: true})
+        .to_return(body: response.to_json)
+      expect(subject.organization_events(organization_id: org_id, exclude_full: true)).to eq(response)
+    end
   end
 
   describe '#organization_event' do

@@ -6,7 +6,11 @@ module MobilizeAmericaClient
     API_BASE_PATH = '/v1'.freeze
 
     def get(path:, params: {})
-      request(method: :get, path: path, params: params)
+      request(method: :get, path:, params:)
+    end
+
+    def post(path:, body:)
+      request(method: :post, path:, body:)
     end
 
     private
