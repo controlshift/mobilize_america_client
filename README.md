@@ -22,12 +22,12 @@ Or install it yourself as:
 
 ## Configuration
 
-By default, the client accesses the public production instance without authentication. 
+By default, the client accesses the public production instance without authentication.
 
 `client = MobilizeAmericaClient::Client.new`
 
 It is also possible to provide an API key to the client to make authenticated requests, or to specify
-other endpoints. 
+other endpoints.
 
 `client = MobilizeAmericaClient::Client.new(api_key: 'abc123', api_domain: 'staging-api.mobilize.us')`
 
@@ -37,12 +37,17 @@ other endpoints.
 Retrieve a list of organizations
 `client.organizations(page: 2, per_page: 50)`
 
-
 Retrieve a list of an organization's events
 `client.organization_events(organization_id: 123)`
 
 Retrieve a specific event
 `client.organization_event(organization_id: 123, event_id: 123)`
+
+Retrieve a list of attendances for a specific event
+`client.organization_event_attendances(organization_id: 123, event_id: 123)`
+
+Retrieve a list of an organization's attendandes
+`client.organization_attendances(organization_id: 123)`
 
 
 ## Development
