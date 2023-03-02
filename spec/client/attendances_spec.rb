@@ -46,5 +46,12 @@ RSpec.describe MobilizeAmericaClient::Client::Attendances do
         .to_return(body: response.to_json)
       expect(subject.organization_attendances(organization_id: org_id, updated_since: updated_since)).to eq(response)
     end
+
+    it 'should support pagination parameters' do
+      stub_request(:get, attendances_url)
+        .with(headers: expected_headers, query: {page: 2, per_page: 100})
+        .to_return(body: response.to_json)
+      expect(subject.organization_attendances(organization_id: org_id, page: 2, per_page: 100)).to eq(response)
+    end
   end
 end
