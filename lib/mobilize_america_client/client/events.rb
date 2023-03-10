@@ -2,9 +2,13 @@ module MobilizeAmericaClient
   class Client
     module Events
       def organization_events(organization_id:, timeslot_start: nil, timeslot_end: nil, updated_since: nil,
-                              max_distance_miles: nil, page: nil, per_page: nil, zipcode: nil,  event_campaign_id: nil,
+                              max_distance_miles: nil, cursor: nil, page: nil, per_page: nil, zipcode: nil,  event_campaign_id: nil,
                               tag_ids: nil, event_types: nil, is_virtual: nil, exclude_full: nil)
         params = {}
+
+        unless cursor.nil?
+          params[:cursor] = cursor
+        end
 
         unless page.nil?
           params[:page] = page
@@ -53,6 +57,8 @@ module MobilizeAmericaClient
         unless exclude_full.nil?
           params[:exclude_full] = exclude_full ? 'true' : 'false'
         end
+
+
 
         get(path: "/organizations/#{esc(organization_id)}/events", params: params)
       end
