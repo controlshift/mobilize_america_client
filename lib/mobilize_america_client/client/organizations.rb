@@ -1,8 +1,12 @@
 module MobilizeAmericaClient
   class Client
     module Organizations
-      def organizations(page: nil, per_page: nil, updated_since: nil)
+      def organizations(page: nil, cursor: nil, per_page: nil, updated_since: nil)
         params = {}
+
+        unless cursor.nil?
+          params[:cursor] = cursor
+        end
 
         unless page.nil?
           params[:page] = page
