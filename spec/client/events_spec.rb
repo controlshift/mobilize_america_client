@@ -125,4 +125,18 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
       expect(subject.organization_event(organization_id: org_id, event_id: event_id)).to eq(response)
     end
   end
+
+  describe 'create_organization_event_attendance' do
+    let(:org_id) { 123 }
+    let(:event_id) { 456 }
+    let(:events_url) { "#{base_url}/organizations/#{org_id}/events/#{event_id}/attendances" }
+    let(:response) { fixture('create_attendance.json').read }
+
+    it 'should return an attendee creation' do
+      stub_request(:post, events_url)
+          .with(headers: standard_headers)
+          .to_return(body: response.to_json)
+      expect(subject.create_organization_event_attendance(organization_id: org_id, event_id: event_id, attendance_data: {})).to eq(response)
+    end
+  end
 end
