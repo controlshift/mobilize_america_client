@@ -6,52 +6,24 @@
 
 Gem::Specification.new do |s|
   s.name = "mobilize-america-client".freeze
-  s.version = "0.5.1"
+  s.version = MobilizeAmericaClient::Client::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
-  s.authors = ["Grey Moore".freeze]
+  s.authors = ["Grey Moore", "Nathan Woodhull"].freeze
   s.date = "2023-03-02"
-  s.email = "grey@controlshiftlabs.com".freeze
+  s.email = ["grey@controlshiftlabs.com", 'nathan@daisychain.app'].freeze
   s.executables = ["console".freeze, "setup".freeze]
   s.extra_rdoc_files = [
     "LICENSE",
     "LICENSE.txt",
     "README.md"
   ]
-  s.files = [
-    ".github/workflows/ci.yml",
-    ".rspec",
-    ".rubocop.yml",
-    ".ruby-gemset",
-    ".ruby-version",
-    "CODE_OF_CONDUCT.md",
-    "Gemfile",
-    "LICENSE",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "bin/console",
-    "bin/setup",
-    "example.rb",
-    "lib/mobilize_america_client.rb",
-    "lib/mobilize_america_client/client.rb",
-    "lib/mobilize_america_client/client/attendances.rb",
-    "lib/mobilize_america_client/client/enums.rb",
-    "lib/mobilize_america_client/client/events.rb",
-    "lib/mobilize_america_client/client/organizations.rb",
-    "lib/mobilize_america_client/errors.rb",
-    "lib/mobilize_america_client/request.rb",
-    "mobilize-america-client.gemspec",
-    "spec/client/attendances_spec.rb",
-    "spec/client/client_spec.rb",
-    "spec/client/enums_spec.rb",
-    "spec/client/events_spec.rb",
-    "spec/client/organizations_spec.rb",
-    "spec/fixtures/organizations.json",
-    "spec/spec_helper.rb"
-  ]
+  spec.files = Dir.chdir(__dir__) do
+    `git ls-files -z`.split("\x0").reject do |f|
+      (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|circleci)|appveyor)})
+    end
+  end
   s.homepage = "http://github.com/controlshift/mobilize_america_client".freeze
   s.licenses = ["MIT".freeze]
   s.rubygems_version = "3.4.3".freeze

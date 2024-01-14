@@ -8,6 +8,8 @@ require 'mobilize_america_client/errors'
 
 module MobilizeAmericaClient
   class Client
+    VERSION = '0.6.0'
+
     attr_reader :connection
     attr_accessor :api_key
 
