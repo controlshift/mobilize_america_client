@@ -4,6 +4,8 @@
 # -*- encoding: utf-8 -*-
 # stub: mobilize-america-client 0.5.1 ruby lib
 
+require 'mobilize_america_client/client'
+
 Gem::Specification.new do |s|
   s.name = "mobilize-america-client".freeze
   s.version = MobilizeAmericaClient::Client::VERSION
