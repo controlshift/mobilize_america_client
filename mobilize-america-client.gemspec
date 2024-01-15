@@ -30,13 +30,13 @@ Gem::Specification.new do |s|
 
   s.specification_version = 4
 
-  s.add_runtime_dependency(%q<faraday>.freeze, ["> 0.15"])
+  s.add_runtime_dependency(%q<faraday>.freeze, ["~> 2"])
   s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
   s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
   s.add_development_dependency(%q<rake>.freeze, [">= 0"])
   s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
   s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
   s.add_development_dependency(%q<dotenv>.freeze, [">= 0"])
-  s.add_development_dependency(%q<byebug>.freeze, [">= 0"])
+  s.add_development_dependency(%q<debug>.freeze, [">= 0"])
 end
 
