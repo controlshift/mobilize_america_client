@@ -32,12 +32,15 @@ module MobilizeAmericaClient
         req.body = ::JSON.generate(body) unless body.empty?
       end
 
-      if response.status == 401
-        raise MobilizeAmericaClient::UnauthorizedError
-      end
-
-      if response.status == 404
-        raise MobilizeAmericaClient::NotFoundError
+      case response.status
+      when 401
+        raise MobilizeAmericaClient::UnauthorizedError, "Unauthorized: #{response.body}"
+      when 404
+        raise MobilizeAmericaClient::NotFoundError, "Not Found: #{response.body}"
+      when 400..499
+        raise MobilizeAmericaClient::ClientError, "Client Error (#{response.status}): #{response.body}"
+      when 500..599
+        raise MobilizeAmericaClient::ServerError, "Server Error (#{response.status}): #{response.body}"
       end
 
       JSON.parse(response.body)

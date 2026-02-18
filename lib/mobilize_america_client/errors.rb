@@ -4,4 +4,10 @@ module MobilizeAmericaClient
 
   class UnauthorizedError < StandardError
   end
+
+  class ServerError < StandardError
+  end
+
+  class ClientError < StandardError
+  end
 end

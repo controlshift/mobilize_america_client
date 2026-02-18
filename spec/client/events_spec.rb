@@ -18,6 +18,30 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
       expect { subject.organization_events(organization_id: org_id) }.to raise_error MobilizeAmericaClient::NotFoundError
     end
 
+    it 'should raise ServerError if response status is 500' do
+      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 500, body: {error: 'internal server error'}.to_json)
+
+      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ServerError, /Server Error \(500\)/)
+    end
+
+    it 'should raise ServerError if response status is 503' do
+      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 503, body: 'Service Unavailable')
+
+      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ServerError, /Server Error \(503\)/)
+    end
+
+    it 'should raise ClientError if response status is 400' do
+      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 400, body: {error: 'bad request'}.to_json)
+
+      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ClientError, /Client Error \(400\)/)
+    end
+
+    it 'should raise ClientError if response status is 422' do
+      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 422, body: {error: 'unprocessable entity'}.to_json)
+
+      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ClientError, /Client Error \(422\)/)
+    end
+
     it 'should call the endpoint and return JSON' do
       stub_request(:get, events_url).with(headers: standard_headers).to_return(body: response.to_json)
       expect(subject.organization_events(organization_id: org_id)).to eq(response)
