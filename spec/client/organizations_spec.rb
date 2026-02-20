@@ -12,7 +12,7 @@ RSpec.describe MobilizeAmericaClient::Client::Organizations do
     let(:response) { fixture('organizations.json').read }
 
     it 'should call the endpoint and return JSON' do
-      stub_request(:get, organizations_url).with(headers: standard_headers).to_return(body: response.to_json)
+      stub_request(:get, organizations_url).with(headers: standard_headers).to_return(body: response.to_json, headers: { 'Content-Type' => 'application/json' })
       expect(subject.organizations).to eq response
     end
   end

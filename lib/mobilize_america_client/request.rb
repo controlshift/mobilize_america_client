@@ -1,5 +1,3 @@
-require 'json'
-
 module MobilizeAmericaClient
   module Request
     API_DOMAIN = 'api.mobilize.us'.freeze
@@ -23,13 +21,11 @@ module MobilizeAmericaClient
       response = connection.send(method) do |req|
         req.path = "#{API_BASE_PATH}#{path}"
         req.params = params
-        req.headers['Content-Type'] = 'application/json'
+        req.body = body
 
         unless api_key.nil?
           req.headers['Authorization'] = "Bearer #{api_key}"
         end
-
-        req.body = ::JSON.generate(body) unless body.empty?
       end
 
       case response.status
@@ -43,7 +39,7 @@ module MobilizeAmericaClient
         raise MobilizeAmericaClient::ServerError, "Server Error (#{response.status}): #{response.body}"
       end
 
-      JSON.parse(response.body)
+      response.body
     end
   end
 end
