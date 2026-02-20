@@ -4,6 +4,11 @@
 
 A minimalist API client for the [MobilizeAmerica API](https://github.com/mobilizeamerica/api):
 
+## Requirements
+
+- Ruby 3.3, 3.4, or 4.0
+- Faraday ~> 2.0
+
 ## Installation
 
 Add this line to your application's Gemfile:
