@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'shared_examples/response_error_handling'
 
 RSpec.describe MobilizeAmericaClient::Client::Attendances do
   let(:api_key) { 'abcde-123456' }
@@ -13,20 +14,16 @@ RSpec.describe MobilizeAmericaClient::Client::Attendances do
     let(:attendances_url) { "#{base_url}/organizations/#{org_id}/attendances" }
     let(:response) { {'data' => [{'id' => 1, 'event' => {'id' => 1111}}, {'id' => 2, 'event' => {'id' => 2222}}]} }
 
-    context 'unauthenticated request' do
-      let(:api_key) { nil }
-
-      it 'should raise if response status is 401' do
-        stub_request(:get, attendances_url).with(headers: {'Content-Type' => 'application/json'}).to_return(status: 401, body: {error: 'unauthorized'}.to_json)
-
-        expect { subject.organization_attendances(organization_id: org_id) }.to raise_error MobilizeAmericaClient::UnauthorizedError
+    it_behaves_like 'response error handling' do
+      let(:call_client_method) do
+        -> { subject.organization_attendances(organization_id: org_id) }
       end
-    end
-
-    it 'should raise if response status is 404' do
-      stub_request(:get, attendances_url).with(headers: request_headers).to_return(status: 404, body: { error: 'not found'}.to_json)
-
-      expect { subject.organization_attendances(organization_id: org_id) }.to raise_error MobilizeAmericaClient::NotFoundError
+      let(:set_up_stub_request) do
+        -> do
+          stub_request(:get, attendances_url).with(headers: request_headers)
+            .to_return(status: response_status, body: response_body, headers: response_headers)
+        end
+      end
     end
 
     it 'should call the endpoint and return JSON' do

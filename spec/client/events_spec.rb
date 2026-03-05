@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'shared_examples/response_error_handling'
 
 RSpec.describe MobilizeAmericaClient::Client::Events do
   let(:standard_headers) { {'Content-Type' => 'application/json'} }
@@ -12,34 +13,16 @@ RSpec.describe MobilizeAmericaClient::Client::Events do
     let(:events_url) { "#{base_url}/organizations/#{org_id}/events" }
     let(:response) { {'data' => [{'id' => 1, 'description' => 'event 1'}, {'id' => 2, 'description' => 'event 2'}]} }
 
-    it 'should raise if response status is 404' do
-      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 404, body: {error: 'not found'}.to_json, headers: standard_headers)
-
-      expect { subject.organization_events(organization_id: org_id) }.to raise_error MobilizeAmericaClient::NotFoundError
-    end
-
-    it 'should raise ServerError if response status is 500' do
-      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 500, body: {error: 'internal server error'}.to_json, headers: standard_headers)
-
-      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ServerError, /Server Error \(500\)/)
-    end
-
-    it 'should raise ServerError if response status is 503' do
-      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 503, body: 'Service Unavailable')
-
-      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ServerError, /Server Error \(503\)/)
-    end
-
-    it 'should raise ClientError if response status is 400' do
-      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 400, body: {error: 'bad request'}.to_json, headers: standard_headers)
-
-      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ClientError, /Client Error \(400\)/)
-    end
-
-    it 'should raise ClientError if response status is 422' do
-      stub_request(:get, events_url).with(headers: standard_headers).to_return(status: 422, body: {error: 'unprocessable entity'}.to_json, headers: standard_headers)
-
-      expect { subject.organization_events(organization_id: org_id) }.to raise_error(MobilizeAmericaClient::ClientError, /Client Error \(422\)/)
+    it_behaves_like 'response error handling' do
+      let(:call_client_method) do
+        -> { subject.organization_events(organization_id: org_id) }
+      end
+      let(:set_up_stub_request) do
+        -> do
+          stub_request(:get, events_url).with(headers: standard_headers)
+            .to_return(status: response_status, body: response_body, headers: response_headers)
+        end
+      end
     end
 
     it 'should call the endpoint and return JSON' do
