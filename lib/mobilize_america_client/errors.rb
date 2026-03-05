@@ -10,4 +10,7 @@ module MobilizeAmericaClient
 
   class ClientError < StandardError
   end
+
+  class RateLimitedError < ClientError
+  end
 end

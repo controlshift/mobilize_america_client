@@ -41,6 +41,23 @@ RSpec.shared_examples_for 'response error handling' do
     end
   end
 
+  context 'response status is 429' do
+    let(:response_status) { 429 }
+    let(:response_body) { {error: 'rate-limited'}.to_json }
+
+    it 'should raise RateLimitedError' do
+      expect{ call_client_method.call }.to raise_error(MobilizeAmericaClient::RateLimitedError)
+    end
+
+    context 'with a Retry-After header' do
+      let(:response_headers) { {'Content-Type' => 'application/json', 'Retry-After' => '3600'} }
+
+      it 'should raise include that info in the error' do
+        expect{ call_client_method.call }.to raise_error(MobilizeAmericaClient::RateLimitedError, /3600/)
+      end
+    end
+  end
+
   context 'response status is 500' do
     let(:response_status) { 500 }
     let(:response_body) { {error: 'internal server error'}.to_json }
