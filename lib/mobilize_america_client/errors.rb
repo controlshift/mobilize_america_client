@@ -1,13 +1,16 @@
 module MobilizeAmericaClient
-  class NotFoundError < StandardError
+  class ClientError < StandardError
   end
 
-  class UnauthorizedError < StandardError
+  class UnauthorizedError < ClientError
+  end
+
+  class NotFoundError < ClientError
+  end
+
+  class RateLimitedError < ClientError
   end
 
   class ServerError < StandardError
-  end
-
-  class ClientError < StandardError
   end
 end
