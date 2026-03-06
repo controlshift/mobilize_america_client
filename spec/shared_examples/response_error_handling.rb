@@ -52,8 +52,12 @@ RSpec.shared_examples_for 'response error handling' do
     context 'with a Retry-After header' do
       let(:response_headers) { {'Content-Type' => 'application/json', 'Retry-After' => '3600'} }
 
-      it 'should raise include that info in the error' do
-        expect{ call_client_method.call }.to raise_error(MobilizeAmericaClient::RateLimitedError, /3600/)
+      it 'should include that info in the error' do
+        expect{ call_client_method.call }.to raise_error do |error|
+          expect(error).to be_a MobilizeAmericaClient::RateLimitedError
+          expect(error.message).to include '3600'
+          expect(error.retry_after).to eq 3600
+        end
       end
     end
   end

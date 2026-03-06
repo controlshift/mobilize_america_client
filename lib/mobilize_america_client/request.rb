@@ -36,7 +36,7 @@ module MobilizeAmericaClient
       when 429
         retry_after_header = response.headers['Retry-After']
         message = "Rate Limited (Retry-After #{retry_after_header}): #{response.body}"
-        raise MobilizeAmericaClient::RateLimitedError, message
+        raise MobilizeAmericaClient::RateLimitedError.new(message, retry_after: retry_after_header)
       when 400..499
         raise MobilizeAmericaClient::ClientError, "Client Error (#{response.status}): #{response.body}"
       when 500..599
