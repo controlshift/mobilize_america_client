@@ -12,9 +12,7 @@ module MobilizeAmericaClient
     attr_reader :retry_after
 
     def initialize(message, retry_after: nil)
-      if retry_after
-        @retry_after = Integer(retry_after)
-      end
+      @retry_after = Integer(retry_after, exception: false)
 
       super(message)
     end

@@ -45,11 +45,16 @@ RSpec.shared_examples_for 'response error handling' do
     let(:response_status) { 429 }
     let(:response_body) { {error: 'rate-limited'}.to_json }
 
-    it 'should raise RateLimitedError' do
-      expect{ call_client_method.call }.to raise_error(MobilizeAmericaClient::RateLimitedError)
+    context 'without a Retry-After header' do
+      it 'should raise RateLimitedError' do
+        expect{ call_client_method.call }.to raise_error do |error|
+          expect(error).to be_a MobilizeAmericaClient::RateLimitedError
+          expect(error.retry_after).to be_nil
+        end
+      end
     end
 
-    context 'with a Retry-After header' do
+    context 'with a valid Retry-After header' do
       let(:response_headers) { {'Content-Type' => 'application/json', 'Retry-After' => '3600'} }
 
       it 'should include that info in the error' do
@@ -57,6 +62,17 @@ RSpec.shared_examples_for 'response error handling' do
           expect(error).to be_a MobilizeAmericaClient::RateLimitedError
           expect(error.message).to include '3600'
           expect(error.retry_after).to eq 3600
+        end
+      end
+    end
+
+    context 'with an invalid Retry-After header' do
+      let(:response_headers) { {'Content-Type' => 'application/json', 'Retry-After' => 'pigs fly'} }
+
+      it 'should ignore it' do
+        expect{ call_client_method.call }.to raise_error do |error|
+          expect(error).to be_a MobilizeAmericaClient::RateLimitedError
+          expect(error.retry_after).to be_nil
         end
       end
     end
